@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+	<div class="auth-container">
+		<div class="auth-card">
+			<div class="brand">
+				<picture>
+					<source type="image/png" srcset="{{ url_for('static', filename='img/logo.png') }}">
+					<img class="logo" src="{{ url_for('static', filename='img/logo.svg') }}" alt="B&S CAR">
+				</picture>
+				<h1>B&S CAR</h1>
+			</div>
+			
+			<h2>Регистрация</h2>
+			
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<div class="flash-messages">
+				{% for message in messages %}
+				<div class="flash-message">{{ message }}</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+			{% endwith %}
+			
+            <form method="post" class="auth-form" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="name">Имя</label>
+					<input type="text" id="name" name="name" required>
+				</div>
+				
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" required>
+				</div>
+				
+                <div class="form-group">
+					<label for="password">Пароль</label>
+					<input type="password" id="password" name="password" required>
+				</div>
+
+                <div class="form-group">
+                    <label for="avatar">Аватар (опционально)</label>
+                    <input type="file" id="avatar" name="avatar" accept="image/*">
+                </div>
+				
+				<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+			</form>
+			
+			<p class="auth-link">
+				Уже есть аккаунт? <a href="{{ url_for('main.login') }}">Войти</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
